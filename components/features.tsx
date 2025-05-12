@@ -37,10 +37,11 @@ export const Features = ({ children, color, colorDark }: FeaturesProps) => {
 };
 
 type MainFeatureProps = {
-  image: string;
+  image?: string;
   text: string;
   title: React.ReactNode;
   imageSize?: "small" | "large";
+  video?: React.ReactNode;
 };
 
 const MainFeature = ({
@@ -48,6 +49,7 @@ const MainFeature = ({
   text,
   title,
   imageSize = "small",
+  video,
 }: MainFeatureProps) => {
   return (
     <>
@@ -62,7 +64,11 @@ const MainFeature = ({
             {title}
           </h2>
           <div className="relative z-10 rounded-[14px] backdrop-blur-[6px] before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(rgba(255,_255,_255,_0.3),_rgba(255,_255,_255,_0)_120%)] before:p-[1px] before:[mask:linear-gradient(black,_black)_content-box_content-box,_linear-gradient(black,_black)] before:[mask-composite:xor] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-[rgba(255,_255,_255,_0.15)] after:[mask:linear-gradient(black,transparent)]">
-            <img src={image} className="h-auto w-full" />
+            {video ? (
+              <div className="w-full h-full aspect-video">{video}</div>
+            ) : (
+              image && <img src={image} className="h-auto w-full" />
+            )}
           </div>
         </Container>
       </div>
@@ -104,10 +110,13 @@ const FeatureGrid = ({ features }: FeatureGridProps) => {
 
 type FeatureCardsProps = {
   features: {
-    image: string;
-    imageClassName: string;
+    image?: string;
+    imageClassName?: string;
     title: string;
     text: string;
+    ctaText?: string;
+    ctaLink?: string;
+    fullWidth?: boolean;
   }[];
 };
 
@@ -115,19 +124,63 @@ const FeatureCards = ({ features }: FeatureCardsProps) => {
   return (
     <Container>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        {features.map(({ title, text, image, imageClassName }) => (
-          <div
-            key={title}
-            className="relative aspect-[1.1/1] overflow-hidden rounded-[2.4rem] border border-transparent-white bg-[radial-gradient(ellipse_at_center,rgba(var(--feature-color),0.15),transparent)] py-6 px-8 before:pointer-events-none before:absolute before:inset-0 before:bg-glass-gradient md:rounded-[4.8rem] md:p-14"
-          >
-            <h3 className="mb-2 text-2xl text-white">{title}</h3>
-            <p className="max-w-[31rem] text-md text-primary-text">{text}</p>
-            <img
-              className={classNames("absolute max-w-none", imageClassName)}
-              src={image}
-            />
-          </div>
-        ))}
+        {features.map(
+          ({
+            title,
+            text,
+            image,
+            imageClassName,
+            ctaText,
+            ctaLink,
+            fullWidth,
+          }) => (
+            <div
+              key={title}
+              className={classNames(
+                "relative overflow-hidden rounded-[2.4rem] border border-transparent-white bg-[radial-gradient(ellipse_at_center,rgba(var(--feature-color),0.15),transparent)] py-6 px-8 before:pointer-events-none before:absolute before:inset-0 before:bg-glass-gradient md:rounded-[4.8rem] md:p-14",
+                !ctaText ? "aspect-[1.1/1]" : "py-16 md:py-20",
+                fullWidth && "md:col-span-2"
+              )}
+            >
+              <h3
+                className={classNames(
+                  "mb-2 text-2xl text-white",
+                  fullWidth && "text-center"
+                )}
+              >
+                {title}
+              </h3>
+              <p
+                className={classNames(
+                  "max-w-[31rem] text-md text-primary-text",
+                  fullWidth && "mx-auto text-center max-w-[60rem]"
+                )}
+              >
+                {text}
+              </p>
+              {ctaText && ctaLink ? (
+                <div className="mt-10 text-center">
+                  <a
+                    href={ctaLink}
+                    className="inline-block rounded-full bg-[rgba(var(--feature-color),1)] px-8 py-4 text-lg font-semibold text-[#000212] transition-colors hover:bg-[rgba(var(--feature-color),0.8)]"
+                  >
+                    {ctaText}
+                  </a>
+                </div>
+              ) : (
+                image && (
+                  <img
+                    className={classNames(
+                      "absolute max-w-none",
+                      imageClassName
+                    )}
+                    src={image}
+                  />
+                )
+              )}
+            </div>
+          )
+        )}
       </div>
     </Container>
   );

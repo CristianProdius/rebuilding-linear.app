@@ -2,61 +2,63 @@
 import classNames from "classnames";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  AssignToIcon,
-  BacklogIcon,
-  NoPriorityIcon,
-  ChangePriorityIcon,
-  ChangeStatusIcon,
-  DoneIcon,
-  InProgressIcon,
-  LabelIcon,
-  PersonIcon,
-  TodoIcon,
-  UrgentIcon,
-  HighIcon,
-  MediumIcon,
-  LowIcon,
-  AddLabels,
+  // We'll reuse some icons but rename them to better match marketing context
+  AssignToIcon as AudienceIcon,
+  BacklogIcon as OrganicIcon,
+  NoPriorityIcon as AnalyticsIcon,
+  ChangePriorityIcon as ChannelIcon,
+  ChangeStatusIcon as FunnelIcon,
+  DoneIcon as ConversionIcon,
+  InProgressIcon as AutomationIcon,
+  LabelIcon as ContentIcon,
+  PersonIcon as LeadIcon,
+  TodoIcon as EmailIcon,
+  UrgentIcon as SocialIcon,
+  HighIcon as RetentionIcon,
+  MediumIcon as SalesIcon,
+  LowIcon as EnrollmentIcon,
+  AddLabels as CreativeIcon,
 } from "./icons/command-bar";
 
-const commandOptions = [
+// Customized marketing options instead of task management options
+const marketingOptions = [
   {
-    label: "Assign to..",
-    icon: AssignToIcon,
+    label: "Target audience...",
+    icon: AudienceIcon,
     subOptions: [
-      { label: "Jori", icon: PersonIcon },
-      { label: "Karri", icon: PersonIcon },
-      { label: "Tuomas", icon: PersonIcon },
+      { label: "Course graduates", icon: LeadIcon },
+      { label: "New leads", icon: LeadIcon },
+      { label: "Cold traffic", icon: LeadIcon },
     ],
   },
   {
-    label: "Change status...",
-    icon: ChangeStatusIcon,
+    label: "Marketing channel...",
+    icon: ChannelIcon,
     subOptions: [
-      { label: "Backlog", icon: BacklogIcon },
-      { label: "Todo", icon: TodoIcon },
-      { label: "In Progress", icon: InProgressIcon },
-      { label: "Done", icon: DoneIcon },
+      { label: "Organic content", icon: OrganicIcon },
+      { label: "Email sequences", icon: EmailIcon },
+      { label: "Social media", icon: SocialIcon },
+      { label: "Paid advertising", icon: ConversionIcon },
     ],
   },
   {
-    label: "Change priority...",
-    icon: ChangePriorityIcon,
+    label: "Funnel stage...",
+    icon: FunnelIcon,
     subOptions: [
-      { label: "No priority", icon: NoPriorityIcon },
-      { label: "Urgent", icon: UrgentIcon },
-      { label: "High", icon: HighIcon },
-      { label: "Medium", icon: MediumIcon },
-      { label: "Low", icon: LowIcon },
+      { label: "Awareness", icon: AnalyticsIcon },
+      { label: "Consideration", icon: RetentionIcon },
+      { label: "Conversion", icon: SalesIcon },
+      { label: "Retention", icon: EnrollmentIcon },
     ],
   },
   {
-    label: "Add labels...",
-    icon: AddLabels,
+    label: "Content type...",
+    icon: CreativeIcon,
     subOptions: [
-      { label: "Bug", icon: () => <LabelIcon type="bug" /> },
-      { label: "Feature", icon: () => <LabelIcon type="feature" /> },
-      { label: "Improvement", icon: () => <LabelIcon type="improvement" /> },
+      { label: "Lead magnet", icon: () => <ContentIcon type="bug" /> },
+      { label: "Case study", icon: () => <ContentIcon type="feature" /> },
+      { label: "Testimonial", icon: () => <ContentIcon type="improvement" /> },
+      { label: "Email automation", icon: AutomationIcon },
     ],
   },
 ] as const;
@@ -87,11 +89,34 @@ export const CommandMenu = () => {
     };
   }, []);
 
+  // Auto-open the menu for demonstration purposes when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpened(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Auto-cycle through top-level options to demonstrate the menu's capabilities
+  useEffect(() => {
+    if (!opened) return;
+
+    const cycleInterval = setInterval(() => {
+      setSetSelectedOption((prev) => {
+        if (prev === null) return 0;
+        return (prev + 1) % marketingOptions.length;
+      });
+    }, 3000);
+
+    return () => clearInterval(cycleInterval);
+  }, [opened]);
+
   const currentOptions = useMemo(() => {
     const options =
       selectedOption === null
-        ? commandOptions
-        : commandOptions[selectedOption].subOptions;
+        ? marketingOptions
+        : marketingOptions[selectedOption].subOptions;
 
     // If no search value is provided, we return all options.
     if (searchValue === "") return options;
@@ -119,10 +144,10 @@ export const CommandMenu = () => {
         )}
       >
         <span className="ml-4 mt-2 bg-white/[0.05] px-2 text-xs leading-10 text-white/50">
-          LIN-111 Walkway lightning
+          Course Marketing Strategy
         </span>
         <input
-          placeholder="Type a command or search..."
+          placeholder="Choose a marketing strategy..."
           className="w-full bg-transparent p-5 text-lg outline-none"
           value={searchValue}
           onChange={(ev) => setSearchValue(ev.target.value)}
@@ -137,11 +162,6 @@ export const CommandMenu = () => {
                 setSearchValue("");
                 if (!clickedRootItem) {
                   setOpened(false);
-                  // We stop propagation to prevent the click event from
-                  // bubbling up to the window and triggering toggleCommandMenu.
-                  // This should be prevented because if that funtion ran, it would
-                  // oterwise reopen the menu again, because it registers a click
-                  // INSIDE the menu.
                   ev.stopPropagation();
                 }
               }}

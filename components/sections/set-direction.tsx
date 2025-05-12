@@ -10,68 +10,63 @@ import {
   WorkflowsIcon,
 } from "../icons/features";
 
-export const SetDirection = () => {
+export const WhyWorkWithUs = () => {
   return (
     <Features color="0,225,244" colorDark="31,49,64">
       <Features.Main
         title={
           <>
-            Set direction
+            Why Work
             <br />
-            with Roadmaps
+            With Us?
           </>
         }
-        image="/roadmap.webp"
+        image="/img/map.png"
         imageSize="large"
-        text="Plan visually, collaborate in cross-team projects, and make better decisions with progress insights and project updates."
+        text="We Don't Just Teach Course Creation — We've Done It Ourselves (Over and Over Again)."
       />
       <Features.Grid
         features={[
           {
             icon: ParentSubIcon,
-            title: "Multi-team projects.",
-            text: "Collaborate across teams and departments.",
+            title: "30+ Online Courses",
+            text: "We've built and launched over 30 courses in-house.",
           },
           {
             icon: AutomatedBacklogIcon,
-            title: "Project documents.",
-            text: "Write project briefs and specs directly in Linear.",
+            title: "112,000+ Students",
+            text: "Our courses have enrolled students from around the world.",
           },
           {
             icon: WorkflowsIcon,
-            title: "Custom roadmaps.",
-            text: "Organize projects across multiple roadmaps.",
+            title: "168 Countries",
+            text: "We've reached students across the globe with our content.",
           },
           {
             icon: CustomViewsIcon,
-            title: "Timeline view.",
-            text: "Visualize the product journey ahead.",
+            title: "23 Different Niches",
+            text: "We have experience across diverse industries and topics.",
           },
           {
             icon: DiscussionIcon,
-            title: "Project insights.",
-            text: "Track scope, velocity, and progress over time.",
+            title: "360+ Businesses Supported",
+            text: "We've helped hundreds of creators build their own course-based products.",
           },
           {
             icon: IssuesIcon,
-            title: "Personal notifications.",
-            text: "Stay in the loop on project activity and updates.",
+            title: "Full-Time Expertise",
+            text: "You'll be working with people who do this full-time — not just talk about it.",
           },
         ]}
       />
       <Features.Cards
         features={[
           {
-            image: "/card-updates.webp",
-            imageClassName: "top-[55%] md:top-[40%] w-full left-[7%]",
-            title: "Project updates",
-            text: "Keep everyone up-to-date on the health and progress of projects.",
-          },
-          {
-            image: "/card-roadmaps.webp",
-            imageClassName: "top-[55%] md:top-[40%] w-full left-[2%]",
-            title: "Focus on the big picture",
-            text: "Explore every company project in one view to easily identify what needs attention.",
+            title: "Ready to Create a Course That Grows Your Business?",
+            text: "We'll help you build a strategic course that aligns with your business goals and drives real results.",
+            ctaText: "Let's talk about what's possible",
+            ctaLink: "/contact",
+            fullWidth: true,
           },
         ]}
       />

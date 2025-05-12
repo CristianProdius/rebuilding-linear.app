@@ -10,68 +10,77 @@ import {
   WorkflowsIcon,
 } from "../icons/features";
 
-export const EnjoyIssueTracking = () => {
+export const BusinessCourseFeatures = () => {
   return (
     <Features color="194,97,254" colorDark="53,42,79">
       <Features.Main
         title={
           <>
-            Issue tracking
+            Strategic Courses
             <br />
-            you'll enjoy using
+            That Grow Your Business
           </>
         }
-        image="/issues.webp"
-        text="Create tasks in seconds, discuss issues in context, and breeze through your work in views tailored to you and your team."
+        video={
+          <iframe
+            src="https://player.vimeo.com/video/1075478881?h=9cf359e10a"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        }
+        text="From planning and production to delivery and scaling — we create premium online courses that help your business educate, convert, and grow."
       />
       <Features.Grid
         features={[
           {
             icon: ParentSubIcon,
-            title: "Parent and sub-issues.",
-            text: "Break larger takss into smaller issues",
+            title: "Strategic Planning & Curriculum Design",
+            text: "We collaborate with you to map out your course's goals, content structure, and outcomes.",
           },
           {
             icon: AutomatedBacklogIcon,
-            title: "Automated backlog.",
-            text: "Linear will auto-close and auto-archive issues.",
+            title: "Full Production – Shooting & Editing",
+            text: "From scripting to editing, we ensure your course is visually engaging and professionally polished.",
           },
           {
             icon: WorkflowsIcon,
-            title: "Custom workflows",
-            text: "Define unique issue states for each team.",
+            title: "Hosting & Delivery",
+            text: "We help you choose the best platform and create a frictionless student experience.",
           },
           {
             icon: CustomViewsIcon,
-            title: "Filters and custom views.",
-            text: "See only what's relevant for you.",
+            title: "Marketing & Scaling",
+            text: "We'll help you build a marketing system that actually gets results.",
           },
           {
             icon: DiscussionIcon,
-            title: "Discussion.",
-            text: "Collaborate on issues without losing context.",
+            title: "Build Industry Authority",
+            text: "Position your brand as a thought leader with professionally produced course content.",
           },
           {
             icon: IssuesIcon,
-            title: "Issue templates.",
-            text: "Guide your team to write effective issues.",
+            title: "Increase Product Adoption",
+            text: "Onboard users, reduce friction, and help them realize your product's value faster.",
           },
         ]}
       />
       <Features.Cards
         features={[
           {
-            image: "/card-board.webp",
+            image: "/1.svg",
             imageClassName: "top-[55%] md:top-[40%] w-[200%]",
-            title: "List and board",
-            text: "Switch between list and board layout to view work from any angle.",
+            title: "Done-For-You Solution",
+            text: "Our team of strategists, writers, videographers, editors, and marketers handle every aspect of course creation.",
           },
           {
-            image: "/card-views.webp",
+            image: "/2.svg",
             imageClassName:
               "top-[45%] left-[12px] md:top-[34%] md:left-[24px] w-[110%]",
-            title: "Make it yours",
-            text: "Quickly apply filters and operators to refine your issue lists and create custom views.",
+            title: "Proven Results",
+            text: "We've built over 30+ online courses, enrolling more than 112,000 students in 168 countries, across 23 different niches.",
           },
         ]}
       />

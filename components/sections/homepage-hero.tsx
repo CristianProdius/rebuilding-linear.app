@@ -11,17 +11,16 @@ export const HomepageHero = () => (
       variant="secondary"
       size="small"
     >
-      <span>Linear 2022 Release – Built for scale</span>{" "}
-      <Highlight>→</Highlight>
+      <span>I am a Business</span> <Highlight>→</Highlight>
     </Button>
     <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-      Linear is a better way
-      <br className="hidden md:block" /> to build products
+      We Build Strategic Courses
+      <br className="hidden md:block" /> That Grow Your Business.
     </HeroTitle>
     <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-      Meet the new standard for modern software development.
-      <br className="hidden md:block" /> Streamline issues, sprints, and product
-      roadmaps.
+      From planning and production to delivery and scaling
+      <br className="hidden md:block" /> we create premium online courses that
+      help your business educate, convert, and grow.
     </HeroSubtitle>
     <Button
       className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]"
